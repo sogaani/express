@@ -255,6 +255,7 @@ describe('res', function(){
       test.expect(200, cb);
     })
 
+    if(!process.env.EXPOSE_HTTP2)
     it('should invoke the callback without error when HEAD', function (done) {
       var app = express();
       var cb = after(2, done);
@@ -379,6 +380,7 @@ describe('res', function(){
       test.expect(200, cb);
     })
 
+    if(!process.env.EXPOSE_HTTP2)
     it('should invoke the callback without error when HEAD', function (done) {
       var app = express();
       var cb = after(2, done);

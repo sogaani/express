@@ -28,8 +28,8 @@ describe('middleware', function(){
         });
       });
 
-      request(app.listen())
-      .get('/')
+      request(app)
+      .put('/')
       .set('Content-Type', 'application/json')
       .send('{"foo":"bar"}')
       .expect('Content-Type', 'application/json')

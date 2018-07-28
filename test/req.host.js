@@ -35,6 +35,7 @@ describe('req', function(){
 
       app.use(function(req, res){
         req.headers.host = null;
+        req.headers[':authority'] = null;
         res.end(String(req.host));
       });
 
