@@ -1,5 +1,5 @@
 var app = require('../../examples/vhost')
-var request = require('supertest')
+var request = require('../support/supertest')
 
 describe('vhost', function(){
   describe('example.com', function(){

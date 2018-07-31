@@ -1,7 +1,7 @@
 
 var express = require('..');
 var methods = require('methods');
-var request = require('supertest');
+var request = require('./support/supertest');
 var utils = require('./support/utils');
 
 describe('res', function(){
@@ -187,7 +187,7 @@ describe('res', function(){
       request(app)
       .get('/')
       .expect('Content-Type', 'application/octet-stream')
-      .expect(200, 'hello', done);
+      .expect(200, new Buffer('hello'), done);
     })
 
     it('should set ETag', function (done) {
@@ -243,7 +243,7 @@ describe('res', function(){
 
       request(app)
       .head('/')
-      .expect('', done);
+      .expect(undefined, done);
     })
   })
 

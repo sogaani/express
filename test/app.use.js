@@ -1,7 +1,7 @@
 
 var after = require('after');
 var express = require('..');
-var request = require('supertest');
+var request = require('./support/supertest');
 
 describe('app', function(){
   it('should emit "mount" when mounted', function(done){

@@ -1,6 +1,6 @@
 
 var express = require('../')
-  , request = require('supertest')
+  , request = require('./support/supertest')
   , bodyParser = require('body-parser')
 
 describe('req', function(){

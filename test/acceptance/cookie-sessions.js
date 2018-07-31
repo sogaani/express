@@ -1,6 +1,6 @@
 
 var app = require('../../examples/cookie-sessions')
-var request = require('supertest')
+var request = require('../support/supertest')
 
 describe('cookie-sessions', function () {
   describe('GET /', function () {

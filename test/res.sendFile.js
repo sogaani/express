@@ -1,7 +1,7 @@
 
 var after = require('after');
 var express = require('../')
-  , request = require('supertest')
+  , request = require('./support/supertest')
   , assert = require('assert');
 var onFinished = require('on-finished');
 var path = require('path');
@@ -150,7 +150,7 @@ describe('res', function(){
 
         request(app)
         .get('/')
-        .expect(200, 'tobi', done);
+        .expect(200, new Buffer('tobi'), done);
       });
     });
 
@@ -255,19 +255,20 @@ describe('res', function(){
       test.expect(200, cb);
     })
 
-    if(!process.env.EXPOSE_HTTP2)
-    it('should invoke the callback without error when HEAD', function (done) {
-      var app = express();
-      var cb = after(2, done);
+    if (!process.env.HTTP2_TEST) {
+      it('should invoke the callback without error when HEAD', function (done) {
+        var app = express();
+        var cb = after(2, done);
 
-      app.use(function (req, res) {
-        res.sendFile(path.resolve(fixtures, 'name.txt'), cb);
+        app.use(function (req, res) {
+          res.sendFile(path.resolve(fixtures, 'name.txt'), cb);
+        });
+
+        request(app)
+        .head('/')
+        .expect(200, cb);
       });
-
-      request(app)
-      .head('/')
-      .expect(200, cb);
-    });
+    }
 
     it('should invoke the callback without error when 304', function (done) {
       var app = express();
@@ -380,19 +381,20 @@ describe('res', function(){
       test.expect(200, cb);
     })
 
-    if(!process.env.EXPOSE_HTTP2)
-    it('should invoke the callback without error when HEAD', function (done) {
-      var app = express();
-      var cb = after(2, done);
+    if (!process.env.HTTP2_TEST) {
+      it('should invoke the callback without error when HEAD', function (done) {
+        var app = express();
+        var cb = after(2, done);
 
-      app.use(function (req, res) {
-        res.sendfile('test/fixtures/name.txt', cb);
+        app.use(function (req, res) {
+          res.sendfile('test/fixtures/name.txt', cb);
+        });
+
+        request(app)
+        .head('/')
+        .expect(200, cb);
       });
-
-      request(app)
-      .head('/')
-      .expect(200, cb);
-    });
+    }
 
     it('should invoke the callback without error when 304', function (done) {
       var app = express();
@@ -503,7 +505,7 @@ describe('res', function(){
 
       request(app)
       .get('/')
-      .expect(200, 'tobi', done);
+      .expect(200, new Buffer('tobi'), done);
     })
 
     it('should accept headers option', function(done){
